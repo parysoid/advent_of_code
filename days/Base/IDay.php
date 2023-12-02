@@ -3,5 +3,7 @@
 
     interface IDay
     {
-        function getResult();
+        function getPartOneResult();
+
+        function getPartTwoResult();
     }

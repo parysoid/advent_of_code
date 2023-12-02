@@ -6,7 +6,7 @@
         /**
          * @return int
          */
-        public function getResult(): int
+        public function getPartOneResult(): int
         {
             $inputText = file( 'days/1/day_one_input.txt' );
             $sum = 0;
@@ -75,6 +75,15 @@
             return (int)$res[ 0 ] . $res[ 1 ];
         }
 
+
+
+        /**
+         * @return void
+         */
+        function getPartTwoResult()
+        {
+            // TODO: Implement getPartTwoResult() method.
+        }
 
 
     }
