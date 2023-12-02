@@ -5,4 +5,4 @@
 
     $today = new DayTwo();
 
-    echo $today->getPartOneResult();
+    echo $today->getPartTwoResult();
