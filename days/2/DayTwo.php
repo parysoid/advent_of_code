@@ -130,7 +130,7 @@
 
             }
 
-            return $max['blue'] * $max['red'] * $max['green'];
+            return $max[ 'blue' ] * $max[ 'red' ] * $max[ 'green' ];
         }
 
 

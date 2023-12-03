@@ -1,0 +1,15 @@
+{
+    "name": "kuba/advent_of_code_2023",
+    "description": "Collection of small programming puzzles for year 2023.",
+    "type": "project",
+    "require": {
+        "tracy/tracy": "^2.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jakub Párys",
+            "email": "jakub.parys@seznam.cz"
+        }
+    ]
+}
