@@ -12,4 +12,4 @@
 
     $today = new DayThree();
 
-    echo $today->getPartOneResult();
+    echo $today->getPartTwoResult();

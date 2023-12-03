@@ -132,9 +132,114 @@
 
 
 
-        function getPartTwoResult()
+        /**
+         * @return int
+         */
+        function getPartTwoResult(): int
         {
-            // TODO: Implement getPartTwoResult() method.
+            $rows = file( 'days/3/input.txt' );
+
+            $sum = 0;
+            $gears = [];
+
+            foreach ( $rows as $rowId => $row )
+            {
+                $row = trim( $row );
+
+                $this->parseRowV2( $row, $rowId, $rows, $gears );
+            }
+
+            foreach ( $gears as $gear )
+            {
+                if ( count( $gear ) === 2 )
+                {
+                    $sum += $gear[ 0 ] * $gear[ 1 ];
+                }
+            }
+
+            return $sum;
+        }
+
+
+
+        /**
+         * @param string $row
+         * @param int $rowId
+         * @param array $rows
+         * @param array $gearNumbers
+         * @return void
+         */
+        private function parseRowV2( string $row, int $rowId, array $rows, array &$gearNumbers ): void
+        {
+            $xCoords = [];
+            $numberChars = [];
+
+            for ( $i = 0; $i < strlen( $row ); $i++ )
+            {
+                $char = $row[ $i ];
+
+                if ( is_numeric( $char ) )
+                {
+                    $numberChars[] = $char;
+                    $xCoords[] = $i;
+                }
+
+                if ( count( $numberChars ) > 0 && ( !is_numeric( $char ) || !isset( $row[ $i + 1 ] ) ) )
+                {
+                    $gearSymbolCoords = $this->parseAdjacentGearSymbol( $rowId, $xCoords, $rows );
+
+                    if ( count( $gearSymbolCoords ) > 0 )
+                    {
+                        $gearSymbolCoords = $gearSymbolCoords[ 'x' ] . '_' . $gearSymbolCoords[ 'y' ];
+                        $gearNumbers[ $gearSymbolCoords ][] = (int)implode( $numberChars );
+                    }
+
+                    $numberChars = [];
+                    $xCoords = [];
+                }
+            }
+        }
+
+
+
+        /**
+         * @param int $y
+         * @param array $xCoords
+         * @param array $rows
+         * @param string $gearSymbol
+         * @return array
+         */
+        private function parseAdjacentGearSymbol( int $y, array $xCoords, array $rows, string $gearSymbol = '*' ): array
+        {
+            $res = [];
+
+            $xCoords[] = min( $xCoords ) - 1;
+            $xCoords[] = max( $xCoords ) + 1;
+
+            $yCoords = [ $y - 1, $y, $y + 1 ];
+
+
+            foreach ( $yCoords as $yCoord )
+            {
+                if ( !isset( $rows[ $yCoord ] ) )
+                {
+                    continue;
+                }
+
+                $row = $rows[ $yCoord ];
+
+                foreach ( $xCoords as $xCoord )
+                {
+                    $char = $row[ $xCoord ];
+
+                    if ( $char === $gearSymbol )
+                    {
+                        return [ 'x' => $xCoord, 'y' => $yCoord ];
+                    }
+                }
+            }
+
+            return $res;
         }
 
 
