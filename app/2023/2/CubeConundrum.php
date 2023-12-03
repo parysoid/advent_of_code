@@ -1,5 +1,7 @@
 <?php
 
+    use Base\ITask;
+
     class CubeConundrum implements ITask
     {
 
@@ -8,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( '2023/2/input.txt' );
+            $inputText = file( __DIR__ . '/input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )
@@ -84,7 +86,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $inputText = file( '2023/2/input.txt' );
+            $inputText = file(  __DIR__ . '/input.txt'  );
             $sum = 0;
 
             foreach ( $inputText as $line )

@@ -3,7 +3,8 @@
     "description": "Collection of small programming puzzles for year 2023.",
     "type": "project",
     "require": {
-        "tracy/tracy": "^2.9"
+        "tracy/tracy": "^2.9",
+        "nette/robot-loader": "^3.4"
     },
     "license": "MIT",
     "authors": [

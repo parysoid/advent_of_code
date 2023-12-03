@@ -3,10 +3,13 @@
 
     require 'vendor/autoload.php';
 
-    require_once('base/ITask.php');
-    require_once('2023/1/Trebuchet.php');
-    require_once('2023/2/CubeConundrum.php');
-    require_once('2023/3/GearRatios.php');
+    $loader = new Nette\Loaders\RobotLoader;
+
+    $loader->addDirectory( __DIR__ . '/app' );
+
+    $loader->setTempDirectory(__DIR__ . '/temp');
+
+    $loader->register();
 
     Debugger::enable();
 

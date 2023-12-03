@@ -1,5 +1,7 @@
 <?php
 
+    use Base\ITask;
+
     class GearRatios implements ITask
     {
 
@@ -137,7 +139,7 @@
          */
         function getPartTwoResult(): int
         {
-            $rows = file( '2023/3/input.txt' );
+            $rows = file( __DIR__ . '/input.txt' );
 
             $sum = 0;
             $gears = [];
