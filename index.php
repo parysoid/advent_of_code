@@ -3,13 +3,13 @@
 
     require 'vendor/autoload.php';
 
-    require_once('days/Base/IDay.php');
-    require_once('days/1/DayOne.php');
-    require_once('days/2/DayTwo.php');
-    require_once('days/3/DayThree.php');
+    require_once('base/ITask.php');
+    require_once('2023/1/Trebuchet.php');
+    require_once('2023/2/CubeConundrum.php');
+    require_once('2023/3/GearRatios.php');
 
     Debugger::enable();
 
-    $today = new DayThree();
+    $today = new GearRatios();
 
     echo $today->getPartTwoResult();

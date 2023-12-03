@@ -1,6 +1,6 @@
 <?php
 
-    class DayOne implements IDay
+    class Trebuchet implements ITask
     {
 
         /**
@@ -8,7 +8,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( 'days/1/day_one_input.txt' );
+            $inputText = file( '2023/1/input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )

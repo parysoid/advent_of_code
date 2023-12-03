@@ -1,9 +1,14 @@
 <?php
 
 
-    interface IDay
+    interface ITask
     {
+
         function getPartOneResult();
 
+
+
         function getPartTwoResult();
+
+
     }

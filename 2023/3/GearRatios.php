@@ -1,6 +1,6 @@
 <?php
 
-    class DayThree implements IDay
+    class GearRatios implements ITask
     {
 
         /**
@@ -8,7 +8,7 @@
          */
         public function getPartOneResult(): int
         {
-            $rows = file( 'days/3/input.txt' );
+            $rows = file( '2023/3/input.txt' );
 
 
             $sum = 0;
@@ -137,7 +137,7 @@
          */
         function getPartTwoResult(): int
         {
-            $rows = file( 'days/3/input.txt' );
+            $rows = file( '2023/3/input.txt' );
 
             $sum = 0;
             $gears = [];

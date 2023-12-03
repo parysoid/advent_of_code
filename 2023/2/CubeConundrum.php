@@ -1,6 +1,6 @@
 <?php
 
-    class DayTwo implements IDay
+    class CubeConundrum implements ITask
     {
 
         /**
@@ -8,7 +8,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( 'days/2/input.txt' );
+            $inputText = file( '2023/2/input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )
@@ -84,7 +84,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $inputText = file( 'days/2/input.txt' );
+            $inputText = file( '2023/2/input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )
