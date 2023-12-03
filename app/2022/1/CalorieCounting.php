@@ -49,9 +49,18 @@
 
 
 
-        function getPartTwoResult()
+        /**
+         * @return int
+         */
+        function getPartTwoResult(): int
         {
-            // TODO: Implement getPartTwoResult() method.
+            $inputText = file( __DIR__ . '/input.txt' );
+
+            $elfInventories = $this->parseCaloriesSumForEachElf( $inputText );
+
+            arsort( $elfInventories,SORT_ASC );
+
+            return array_sum( array_slice( $elfInventories, 0, 3 ) );
         }
 
 
