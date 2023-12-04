@@ -31,10 +31,17 @@
         {
             $lines = file( __DIR__ . '/input.txt' );
 
-            $scoreSum = 0;
+            $prioritiesSum = 0;
+
+            $lines = array_chunk( $lines, 3 );
+
+            foreach ( $lines as $group )
+            {
+                $prioritiesSum += $this->parseGroupBadges( $group );
+            }
 
 
-            return $scoreSum;
+            return $prioritiesSum;
         }
 
 
@@ -61,7 +68,32 @@
                 if ( strpos( $rightCompartment, $itemChar ) !== false )
                 {
                     return $priorities[ $itemChar ];
+                }
+            }
 
+            return 0;
+        }
+
+
+
+        /**
+         * @param array $group
+         * @return int
+         */
+        private function parseGroupBadges( array $group ): int
+        {
+            $itemChars = array_merge( range( 'a', 'z' ), range( 'A', 'Z' ) );
+            $priorityValues = range( 1, 52 );
+            $priorities = array_combine( $itemChars, $priorityValues );
+
+
+            for ( $i = 0; $i < strlen( $group[ 0 ] ); $i++ )
+            {
+                $itemChar = $group[ 0 ][$i];
+
+                if ( strpos( $group[ 1 ], $itemChar ) !== false && strpos( $group[ 2 ], $itemChar ) !== false )
+                {
+                    return $priorities[ $itemChar ];
                 }
             }
 
