@@ -110,22 +110,78 @@
 
 
         /**
-         * @return int
+         * @return string
          */
-        function getPartTwoResult(): int
+        public function getPartTwoResult(): string
         {
-            $lines = file( __DIR__ . '/input.txt' );
+            $lines = file_get_contents( __DIR__ . '/input.txt' );
+            $lines = str_replace( '     ', ' [ ] ', $lines );
+            $lines = str_replace( '     ', ' [ ] ', $lines );
+            $lines = explode( "\r\n", $lines );
 
-            $count = 0;
+            $topFloor = [];
+            $schema = [];
 
-            foreach ( $lines as $pair )
+            $this->parseSchemaToMultiArray( $lines, $schema );
+            $this->processProcedureStepsV2( $lines, $schema );
+
+            foreach ( $schema as $col )
             {
-                $count += $this->parsePairSectorsOverlap( $pair );
+                if ( isset( $col[ 0 ] ) )
+                {
+                    $topFloor[] = $col[ 0 ];
+                }
             }
 
-            return $count;
+            return implode( '', $topFloor );
         }
 
+
+
+        /**
+         * @param array $steps
+         * @param array $cols
+         * @return void
+         */
+        private function processProcedureStepsV2( array $steps, array &$cols ): void
+        {
+            foreach ( $steps as $step )
+            {
+                $step = explode( ' ', str_replace( [ 'move ', 'from ', 'to ' ], [ '', '', '' ], $step ) );
+
+                $quantity = (int)$step[ 0 ];
+                $from = (int)$step[ 1 ];
+                $to = (int)$step[ 2 ];
+
+                $this->processCraneMovements( $cols, $from, $to, $quantity );
+            }
+        }
+
+
+
+        /**
+         * @param array $cols
+         * @param int $from
+         * @param int $to
+         * @param int $quantity
+         * @return void
+         */
+        private function processCraneMovements( array &$cols, int $from, int $to, int $quantity ): void
+        {
+            $load = [];
+
+            for ( $i = 0; $i < $quantity; $i++ )
+            {
+                $load[] = array_shift( $cols[ $from ] );
+            }
+
+            krsort( $load );
+
+            foreach ( $load as $crate )
+            {
+                $stackLen = array_unshift( $cols[ $to ], $crate );
+            }
+        }
 
 
     }
