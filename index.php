@@ -13,6 +13,6 @@
 
     Debugger::enable();
 
-    $today = new GearRatios();
+    $today = new Scratchcards();
 
-    echo $today->getPartTwoResult();
+    echo $today->getPartOneResult();
