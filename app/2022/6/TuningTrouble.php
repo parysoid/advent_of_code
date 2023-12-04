@@ -19,17 +19,18 @@
 
         /**
          * @param string $input
+         * @param int $markerDistinctChars
          * @return int
          */
-        private function parseStartOfPacketMarker( string $input ): int
+        private function parseStartOfPacketMarker( string $input, int $markerDistinctChars = 4 ): int
         {
             for ( $i = 0; $i < strlen( $input ); $i++ )
             {
-                $chunk = substr( $input, $i, 4 );
+                $chunk = substr( $input, $i, $markerDistinctChars );
 
-                if ( count( array_unique( str_split( $chunk ) ) ) === 4 )
+                if ( count( array_unique( str_split( $chunk ) ) ) === $markerDistinctChars )
                 {
-                    return $i + 4;
+                    return $i + $markerDistinctChars;
                 }
             }
 
@@ -43,7 +44,9 @@
          */
         public function getPartTwoResult(): string
         {
-            return '';
+            $input = trim( file_get_contents( __DIR__ . '/input.txt' ) );
+
+            return $this->parseStartOfPacketMarker( $input, 14 );
         }
 
 
