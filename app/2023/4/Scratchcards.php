@@ -66,12 +66,66 @@
         {
             $rows = file( __DIR__ . '/input.txt' );
 
-            $sum = 0;
+            $wonCards = [];
 
+            foreach ( $rows as $row )
+            {
+                $this->parseCardScoreV3( $row, $wonCards );
+            }
 
-            return $sum;
+            return array_sum($wonCards) ;
         }
 
+
+
+        /**
+         * @param string $row
+         * @param array $wonCards
+         * @return void
+         */
+        private function parseCardScoreV3( string $row, array &$wonCards ): void
+        {
+            $row = trim( $row );
+            $cardId = trim( str_replace( 'Card', '', explode( ':', $row )[ 0 ] ) );
+
+            if ( isset( $wonCards[ $cardId ] ) )
+            {
+                $wonCards[ $cardId ] += 1;
+            }
+            else
+            {
+                $wonCards[ $cardId ] = 1;
+            }
+
+            $currentCardQuantity = $wonCards[ $cardId ];
+
+            for ( $i = 0; $i < $currentCardQuantity; $i++ )
+            {
+                $numbers = substr( $row, strpos( $row, ':' ) + 1 );
+                $numbers = explode( '|', $numbers );
+
+                $winningNumbers = array_filter( explode( ' ', trim( $numbers[ 0 ] ) ) );
+                $myNumbers = array_filter( explode( ' ', trim( $numbers[ 1 ] ) ) );
+
+                $nextCardId = (int)$cardId + 1;
+
+                foreach ( $winningNumbers as $winningNumber )
+                {
+                    if ( in_array( $winningNumber, $myNumbers, ) )
+                    {
+                        if ( isset( $wonCards[ $nextCardId ] ) )
+                        {
+                            $wonCards[ $nextCardId ] = $wonCards[ $nextCardId ] + 1;
+                        }
+                        else
+                        {
+                            $wonCards[ $nextCardId ] = 1;
+                        }
+                        $nextCardId++;
+                    }
+                }
+            }
+        }
 
 
     }
