@@ -33,7 +33,7 @@
                 }
             }
 
-            return array_product($res);
+            return array_product( $res );
         }
 
 
@@ -43,7 +43,25 @@
          */
         public function getPartTwoResult(): int
         {
-            return 0;
+            $rows = file( __DIR__ . '/input.txt' );
+
+            $time = (int)str_replace( [ 'Time:      ', ' ', "\r\n" ], [ '', '', '' ], $rows[ 0 ] );
+            $record = (int)str_replace( [ 'Distance:  ', ' ' ], [ '', '' ], $rows[ 1 ] );
+
+            $firstBeat = 0;
+
+            for ( $i = 0; $i <= $time; $i++ )
+            {
+                $distance = $i * ( $time - $i );
+
+                if ( $distance > $record )
+                {
+                    $firstBeat = $i;
+                    break;
+                }
+            }
+
+            return $time - ( 2 * $firstBeat ) + 1;
         }
 
 
