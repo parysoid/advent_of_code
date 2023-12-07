@@ -20,5 +20,4 @@
 
     $today = new CamelCards();
 
-    echo $today->getPartOneResult();
-
+    echo $today->getPartTwoResult();
