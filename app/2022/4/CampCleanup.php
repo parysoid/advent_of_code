@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $lines = file( __DIR__ . '/input.txt' );
+            $lines = file( INPUTS_PATH . '/2022/4_input.txt' );
 
             $count = 0;
 
@@ -50,6 +50,25 @@
 
 
         /**
+         * @return int
+         */
+        function getPartTwoResult(): int
+        {
+            $lines = file( INPUTS_PATH . '/2022/4_input.txt' );
+
+            $count = 0;
+
+            foreach ( $lines as $pair )
+            {
+                $count += $this->parsePairSectorsOverlap( $pair );
+            }
+
+            return $count;
+        }
+
+
+
+        /**
          * @param string $pair
          * @return int
          */
@@ -70,25 +89,6 @@
             }
 
             return 0;
-        }
-
-
-
-        /**
-         * @return int
-         */
-        function getPartTwoResult(): int
-        {
-            $lines = file( __DIR__ . '/input.txt' );
-
-            $count = 0;
-
-            foreach ( $lines as $pair )
-            {
-                $count += $this->parsePairSectorsOverlap( $pair );
-            }
-
-            return $count;
         }
 
 

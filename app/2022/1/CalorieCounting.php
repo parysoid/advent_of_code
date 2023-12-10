@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( __DIR__ . '/input.txt' );
+            $inputText = file( INPUTS_PATH . '/2022/1_input.txt' );
 
             $elfInventories = $this->parseCaloriesSumForEachElf( $inputText );
 
@@ -54,11 +54,11 @@
          */
         function getPartTwoResult(): int
         {
-            $inputText = file( __DIR__ . '/input.txt' );
+            $inputText = file( INPUTS_PATH . '/2022/1_input.txt' );
 
             $elfInventories = $this->parseCaloriesSumForEachElf( $inputText );
 
-            arsort( $elfInventories,SORT_ASC );
+            arsort( $elfInventories, SORT_ASC );
 
             return array_sum( array_slice( $elfInventories, 0, 3 ) );
         }

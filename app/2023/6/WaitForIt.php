@@ -11,7 +11,7 @@
         public function getPartOneResult(): int
         {
             $res = [];
-            $rows = file( __DIR__ . '/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/6_input.txt' );
 
             $times = array_filter( explode( ' ', str_replace( 'Time:      ', '', trim( $rows[ 0 ] ) ) ) );
             $records = array_filter( explode( ' ', str_replace( 'Distance:  ', '', $rows[ 1 ] ) ) );
@@ -43,7 +43,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $rows = file( __DIR__ . '/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/6_input.txt' );
 
             $time = (int)str_replace( [ 'Time:      ', ' ', "\r\n" ], [ '', '', '' ], $rows[ 0 ] );
             $record = (int)str_replace( [ 'Distance:  ', ' ' ], [ '', '' ], $rows[ 1 ] );

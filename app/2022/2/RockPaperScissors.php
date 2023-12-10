@@ -10,32 +10,13 @@
          */
         public function getPartOneResult(): int
         {
-            $lines = file( __DIR__ . '/input.txt' );
+            $lines = file( INPUTS_PATH . '/2022/2_input.txt' );
 
             $scoreSum = 0;
 
             foreach ( $lines as $round )
             {
                 $scoreSum += $this->parseRoundScore( $round );
-            }
-
-            return $scoreSum;
-        }
-
-
-
-        /**
-         * @return int
-         */
-        function getPartTwoResult(): int
-        {
-            $lines = file( __DIR__ . '/input.txt' );
-
-            $scoreSum = 0;
-
-            foreach ( $lines as $round )
-            {
-                $scoreSum += $this->parseRoundScoreV2( $round );
             }
 
             return $scoreSum;
@@ -70,6 +51,25 @@
             {
                 return 6 + $points[ $me ];
             }
+        }
+
+
+
+        /**
+         * @return int
+         */
+        function getPartTwoResult(): int
+        {
+            $lines = file( INPUTS_PATH . '/2022/2_input.txt' );
+
+            $scoreSum = 0;
+
+            foreach ( $lines as $round )
+            {
+                $scoreSum += $this->parseRoundScoreV2( $round );
+            }
+
+            return $scoreSum;
         }
 
 

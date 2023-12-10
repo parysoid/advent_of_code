@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $input = trim( file_get_contents( __DIR__ . '/input.txt' ) );
+            $input = trim( file_get_contents( INPUTS_PATH . '/2022/6_input.txt' ) );
 
             return $this->parseStartOfPacketMarker( $input );
         }
@@ -44,7 +44,7 @@
          */
         public function getPartTwoResult(): string
         {
-            $input = trim( file_get_contents( __DIR__ . '/input.txt' ) );
+            $input = trim( file_get_contents( INPUTS_PATH . '/2022/6_input.txt' ) );
 
             return $this->parseStartOfPacketMarker( $input, 14 );
         }

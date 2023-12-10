@@ -13,7 +13,7 @@
             $res = [];
             $handsParsed = [];
 
-            $hands = file( __DIR__ . '/input.txt' );
+            $hands = file( INPUTS_PATH . '/2023/7_input.txt' );
 
             foreach ( $hands as $hand )
             {
@@ -126,7 +126,7 @@
             $res = [];
             $handsParsed = [];
 
-            $hands = file( __DIR__ . '/input.txt' );
+            $hands = file( INPUTS_PATH . '/2023/7_input.txt' );
 
             foreach ( $hands as $hand )
             {

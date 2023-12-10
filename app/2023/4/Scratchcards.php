@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $rows = file( __DIR__ . '/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/4_input.txt' );
 
             $sum = 0;
 
@@ -64,7 +64,7 @@
          */
         function getPartTwoResult(): int
         {
-            $rows = file( __DIR__ . '/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/4_input.txt' );
 
             $wonCards = [];
 
@@ -73,7 +73,7 @@
                 $this->parseCardScoreV3( $row, $wonCards );
             }
 
-            return array_sum($wonCards) ;
+            return array_sum( $wonCards );
         }
 
 

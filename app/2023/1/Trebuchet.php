@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( __DIR__ . '/input.txt' );
+            $inputText = file( INPUTS_PATH . '/2023/1_input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )

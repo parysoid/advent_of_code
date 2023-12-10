@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): string
         {
-            $lines = file_get_contents( __DIR__ . '/input.txt' );
+            $lines = file_get_contents( INPUTS_PATH . '/2022/5_input.txt' );
             $lines = str_replace( '     ', ' [ ] ', $lines );
             $lines = str_replace( '     ', ' [ ] ', $lines );
             $lines = explode( "\r\n", $lines );
@@ -114,7 +114,7 @@
          */
         public function getPartTwoResult(): string
         {
-            $lines = file_get_contents( __DIR__ . '/input.txt' );
+            $lines = file_get_contents( INPUTS_PATH . '/2022/5_input.txt' );
             $lines = str_replace( '     ', ' [ ] ', $lines );
             $lines = str_replace( '     ', ' [ ] ', $lines );
             $lines = explode( "\r\n", $lines );

@@ -12,7 +12,7 @@
         {
             $elements = [];
 
-            $rows = explode( "\r\n", file_get_contents( __DIR__ . '/input.txt' ) );
+            $rows = explode( "\r\n", file_get_contents( INPUTS_PATH . '/2023/8_input.txt' ) );
             $instructions = $rows[ 0 ];
             $rows = array_slice( $rows, 2 );
 
@@ -63,7 +63,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $lines = file( __DIR__ . '/input.txt', FILE_IGNORE_NEW_LINES );
+            $lines = file( INPUTS_PATH . '/2023/8_input.txt' );
             $instructions = array_shift( $lines );
             $network = [];
 
@@ -85,6 +85,20 @@
             }
 
             return $this->calculateLCM( $cycleLengths );
+        }
+
+
+
+        /**
+         * @param array $elements
+         * @param string $letter
+         * @return array
+         */
+        private function filterElementsWithEndingLetter( array $elements, string $letter ): array
+        {
+            return array_filter( $elements, function ( $el ) use ( $letter ) {
+                return $el[ 2 ] === $letter ? 1 : 0;
+            }, ARRAY_FILTER_USE_KEY );
         }
 
 
@@ -115,15 +129,17 @@
 
 
         /**
-         * @param array $elements
-         * @param string $letter
-         * @return array
+         * @param array $cycleLengths
+         * @return int
          */
-        private function filterElementsWithEndingLetter( array $elements, string $letter ): array
+        private function calculateLCM( array $cycleLengths ): int
         {
-            return array_filter( $elements, function ( $el ) use ( $letter ) {
-                return $el[ 2 ] === $letter ? 1 : 0;
-            }, ARRAY_FILTER_USE_KEY );
+            $lcm = 1;
+            foreach ( $cycleLengths as $length )
+            {
+                $lcm = $this->lcm( $lcm, $length );
+            }
+            return $lcm;
         }
 
 
@@ -152,22 +168,6 @@
                 return $a;
             }
             return $this->gcd( $b, $a % $b );
-        }
-
-
-
-        /**
-         * @param array $cycleLengths
-         * @return int
-         */
-        private function calculateLCM( array $cycleLengths ): int
-        {
-            $lcm = 1;
-            foreach ( $cycleLengths as $length )
-            {
-                $lcm = $this->lcm( $lcm, $length );
-            }
-            return $lcm;
         }
 
 

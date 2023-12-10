@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $inputText = file( __DIR__ . '/input.txt' );
+            $inputText = file( INPUTS_PATH . '/2023/2_input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )
@@ -86,7 +86,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $inputText = file(  __DIR__ . '/input.txt'  );
+            $inputText = file( INPUTS_PATH . '/2023/2_input.txt' );
             $sum = 0;
 
             foreach ( $inputText as $line )

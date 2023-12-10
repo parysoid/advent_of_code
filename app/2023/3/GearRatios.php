@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $rows = file( '2023/3/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/3_input.txt' );
 
 
             $sum = 0;
@@ -139,7 +139,7 @@
          */
         function getPartTwoResult(): int
         {
-            $rows = file( __DIR__ . '/input.txt' );
+            $rows = file( INPUTS_PATH . '/2023/3_input.txt' );
 
             $sum = 0;
             $gears = [];

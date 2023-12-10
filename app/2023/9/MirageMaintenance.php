@@ -11,7 +11,7 @@
         public function getPartOneResult(): int
         {
             $sum = 0;
-            $sequences = file( __DIR__ . '/input.txt' );
+            $sequences = file( INPUTS_PATH . '/2023/9_input.txt' );
 
             foreach ( $sequences as $sequence )
             {
@@ -74,7 +74,7 @@
         public function getPartTwoResult(): int
         {
             $sum = 0;
-            $sequences = file( __DIR__ . '/input.txt' );
+            $sequences = file( INPUTS_PATH . '/2023/9_input.txt' );
 
             foreach ( $sequences as $sequence )
             {
@@ -123,7 +123,7 @@
                 $numA = $row[ 0 ];
                 $numB = $rowNext[ 0 ];
 
-                array_unshift( $rows[ $i - 1 ],  $numB - $numA);
+                array_unshift( $rows[ $i - 1 ], $numB - $numA );
             }
 
             return $rows[ 0 ][ 0 ];

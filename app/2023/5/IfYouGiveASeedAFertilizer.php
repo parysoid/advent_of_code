@@ -11,7 +11,7 @@
         public function getPartOneResult(): int
         {
             $res = [];
-            $input = file_get_contents( __DIR__ . '/input.txt' );
+            $input = file_get_contents( INPUTS_PATH . '/2023/5_input.txt' );
 
             $firstRow = trim( substr( $input, strpos( $input, ' ' ) ) );
             $firstRow = substr( $firstRow, 0, strpos( $firstRow, "\r\n" ) );
@@ -92,7 +92,7 @@
          */
         public function getPartTwoResult(): int
         {
-            $input = file_get_contents( __DIR__ . '/input.txt' );
+            $input = file_get_contents( INPUTS_PATH . '/2023/5_input.txt' );
 
             $ranges = $this->parseNumbers( $input );
 
@@ -119,6 +119,32 @@
             }
 
             return $locationNumber;
+        }
+
+
+
+        /**
+         * @param string $input
+         * @return array
+         */
+        private function parseNumbers( string $input ): array
+        {
+            $res = [];
+
+            $firstRow = trim( substr( $input, strpos( $input, ' ' ) ) );
+            $firstRow = substr( $firstRow, 0, strpos( $firstRow, "\r\n" ) );
+            $numbers = explode( ' ', $firstRow );
+
+
+            for ( $i = 0; $i <= count( $numbers ) / 2; $i += 2 )
+            {
+                $min = (int)$numbers[ $i ];
+                $max = $min + $numbers[ $i + 1 ] - 1;
+
+                $res[] = [ $min, $max ];
+            }
+
+            return $res;
         }
 
 
@@ -180,32 +206,6 @@
                     break;
                 }
             }
-        }
-
-
-
-        /**
-         * @param string $input
-         * @return array
-         */
-        private function parseNumbers( string $input ): array
-        {
-            $res = [];
-
-            $firstRow = trim( substr( $input, strpos( $input, ' ' ) ) );
-            $firstRow = substr( $firstRow, 0, strpos( $firstRow, "\r\n" ) );
-            $numbers = explode( ' ', $firstRow );
-
-
-            for ( $i = 0; $i <= count( $numbers ) / 2; $i += 2 )
-            {
-                $min = (int)$numbers[ $i ];
-                $max = $min + $numbers[ $i + 1 ] - 1;
-
-                $res[] = [ $min, $max ];
-            }
-
-            return $res;
         }
 
 

@@ -6,6 +6,7 @@
 
     set_time_limit( 60 * 60 * 24 );
 
+    const INPUTS_PATH = __DIR__. '/inputs';
 
     $loader = new Nette\Loaders\RobotLoader;
 
@@ -18,6 +19,6 @@
     Debugger::enable();
     Debugger::$maxLength = 15000;
 
-    $today = new CamelCards();
+    $today = new MirageMaintenance();
 
     echo $today->getPartTwoResult();

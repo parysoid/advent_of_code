@@ -10,7 +10,7 @@
          */
         public function getPartOneResult(): int
         {
-            $lines = file( __DIR__ . '/input.txt' );
+            $lines = file( INPUTS_PATH . '/2022/3_input.txt' );
 
             $prioritiesSum = 0;
 
@@ -18,28 +18,6 @@
             {
                 $prioritiesSum += $this->parseItemPriority( $rucksack );
             }
-
-            return $prioritiesSum;
-        }
-
-
-
-        /**
-         * @return int
-         */
-        function getPartTwoResult(): int
-        {
-            $lines = file( __DIR__ . '/input.txt' );
-
-            $prioritiesSum = 0;
-
-            $lines = array_chunk( $lines, 3 );
-
-            foreach ( $lines as $group )
-            {
-                $prioritiesSum += $this->parseGroupBadges( $group );
-            }
-
 
             return $prioritiesSum;
         }
@@ -77,6 +55,28 @@
 
 
         /**
+         * @return int
+         */
+        function getPartTwoResult(): int
+        {
+            $lines = file( INPUTS_PATH . '/2022/3_input.txt' );
+
+            $prioritiesSum = 0;
+
+            $lines = array_chunk( $lines, 3 );
+
+            foreach ( $lines as $group )
+            {
+                $prioritiesSum += $this->parseGroupBadges( $group );
+            }
+
+
+            return $prioritiesSum;
+        }
+
+
+
+        /**
          * @param array $group
          * @return int
          */
@@ -89,7 +89,7 @@
 
             for ( $i = 0; $i < strlen( $group[ 0 ] ); $i++ )
             {
-                $itemChar = $group[ 0 ][$i];
+                $itemChar = $group[ 0 ][ $i ];
 
                 if ( strpos( $group[ 1 ], $itemChar ) !== false && strpos( $group[ 2 ], $itemChar ) !== false )
                 {
