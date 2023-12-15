@@ -16,7 +16,7 @@
 
             foreach ( $steps as $step )
             {
-                $sum += $this->processStep( $step );
+                $sum += $this->processHash( $step );
             }
 
             return $sum;
@@ -24,7 +24,11 @@
 
 
 
-        private function processStep( string $step ): int
+        /**
+         * @param string $step
+         * @return int
+         */
+        private function processHash( string $step ): int
         {
             $res = 0;
 
@@ -47,7 +51,43 @@
          */
         public function getPartTwoResult(): int
         {
-            return 0;
+            $steps = explode( ',', file_get_contents( INPUTS_PATH . '/2023/15_input.txt' ) );
+
+            $boxes = new Boxes();
+
+            foreach ( $steps as $step )
+            {
+                $this->processHashmap( $step, $boxes );
+            }
+
+            return $boxes->getFocusingPower();
+        }
+
+
+
+        /**
+         * @param string $step
+         * @param Boxes $boxes
+         * @return void
+         */
+        private function processHashmap( string $step, Boxes $boxes ): void
+        {
+            $operation = strpos( $step, '-' ) !== false ? 'DASH' : 'EQUALS_SIGN';
+
+            $step = explode( ';', str_replace( [ '=', '-' ], [ ';' ], $step ) );
+            $label = $step[ 0 ];
+            $boxNumber = $this->processHash( $label );
+
+            if ( $operation === 'EQUALS_SIGN' )
+            {
+                $focalLength = (int)$step[ 1 ];
+
+                $boxes->attachLens( $boxNumber, $label, $focalLength );
+            }
+            else
+            {
+                $boxes->removeLens( $boxNumber, $label );
+            }
         }
 
 
