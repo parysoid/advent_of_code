@@ -1,6 +1,8 @@
 <?php
 
-    class PrintQueue implements \Base\ITask
+    use Base\ITask;
+
+    class PrintQueue implements ITask
     {
 
         /**
@@ -30,7 +32,26 @@
          */
         function getPartTwoResult(): int
         {
-            return 0;
+            $sum = 0;
+
+            $rules = $this->parseRules();
+            $updates = $this->parseUpdates();
+
+            foreach ( $updates as $update )
+            {
+                $isValid = $this->validateUpdate( $rules, $update );
+
+                if ( !$isValid )
+                {
+                    usort( $update, function ( $a, $b ) use ( $rules ) {
+                        return isset( $rules[ $a ] ) && in_array( $b, $rules[ $a ] ) ? 1 : 0;
+                    } );
+
+                    $sum += (int)$update[ (int)count( $update ) / 2 ];
+                }
+            }
+
+            return $sum;
         }
 
 
@@ -48,14 +69,16 @@
 
                 $siblings = array_slice( $update, 0, $i );
 
-                if ( array_key_exists( $num, $rules ) )
+                if ( !array_key_exists( $num, $rules ) )
                 {
-                    foreach ( $siblings as $prevSibling )
+                    continue;
+                }
+
+                foreach ( $siblings as $prevSibling )
+                {
+                    if ( in_array( $prevSibling, $rules[ $num ], true ) )
                     {
-                        if ( in_array( $prevSibling, $rules[ $num ], true ) )
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
