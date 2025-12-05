@@ -65,9 +65,44 @@
         function getPartTwoResult(): int
         {
             $inputText = file( INPUTS_PATH . '/2025/1_input.txt' );
-            $sum = 0;
+            $dial = 50;
+            $zeroCount = 0;
 
-            return $sum;
+            foreach ( $inputText as $line )
+            {
+                $order = trim( $line );
+                $direction = $order[ 0 ];
+                $value = (int)substr( $order, 1 );
+
+                $zerosMet = (int)ceil( $value / 100 ) - 1;
+                $zeroCount += $zerosMet;
+
+                $value = $value % 100;
+
+                if ( $direction === 'L' )
+                {
+                    if ( $dial !== 0 && $dial - $value < 0 )
+                    {
+                        $zeroCount++;
+                    }
+                    $dial = ( $dial - $value + 100 ) % 100;
+                }
+                else
+                {
+                    if ( $dial !== 0 && $dial + $value > 99 && $dial + $value !== 100 )
+                    {
+                        $zeroCount++;
+                    }
+                    $dial = ( $dial + $value ) % 100;
+                }
+
+                if ( $dial === 0 )
+                {
+                    $zeroCount++;
+                }
+            }
+
+            return $zeroCount;
         }
 
 
