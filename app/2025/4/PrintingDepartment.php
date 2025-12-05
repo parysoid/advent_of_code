@@ -12,9 +12,41 @@
         function getPartOneResult(): int
         {
             $lines = $this->readLines( 2025, 4 );
+            return $this->removeRolls( $lines );
+        }
+
+
+
+        /**
+         * @return int
+         */
+        function getPartTwoResult(): int
+        {
+            $lines = $this->readLines( 2025, 4 );
+            $sum = 0;
+
+            do
+            {
+                $rollsRemoved = $this->removeRolls( $lines );
+                $sum += $rollsRemoved;
+            }
+            while ( $rollsRemoved > 0 );
+
+            return $sum;
+        }
+
+
+
+        /**
+         * @param array $lines
+         * @return int
+         */
+        private function removeRolls( array &$lines ): int
+        {
             $sum = 0;
             $linesCount = count( $lines );
             $maxRolls = 3;
+            $res = [];
 
             for ( $y = 0; $y < $linesCount; $y++ )
             {
@@ -64,27 +96,18 @@
                     if ( $c <= $maxRolls )
                     {
                         $sum++;
+                        $res[] = [ $y, $x ];
                     }
                 }
             }
 
-            return $sum;
-        }
-
-
-
-        /**
-         * @return int
-         */
-        function getPartTwoResult(): int
-        {
-            $lines = $this->readLines( 2025, 4 );
-            $sum = 0;
-
+            foreach ( $res as [ $y, $x ] )
+            {
+                $lines[ $y ][ $x ] = '.';
+            }
 
             return $sum;
         }
-
 
 
     }
