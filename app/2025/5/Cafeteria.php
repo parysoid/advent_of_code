@@ -43,6 +43,33 @@
             $input = $this->readLines( 2025, 5 );
             $sum = 0;
 
+            [ $ranges ] = $this->parseInput( $input );
+
+            usort( $ranges, function ( $a, $b ) {
+                [ $aFrom ] = explode( '-', $a );
+                [ $bFrom ] = explode( '-', $b );
+                return $aFrom - $bFrom;
+            } );
+
+            $c = 0;
+
+            foreach ( $ranges as $range )
+            {
+                [ $min, $max ] = explode( '-', $range );
+
+                if ( (int)$max > $c )
+                {
+                    if ( $c >= $min )
+                    {
+                        $min = $c + 1;
+                    }
+
+                    $freshIds = (int)$max - (int)$min + 1;
+                    $sum += $freshIds;
+                    $c = (int)$max;
+                }
+            }
+
             return $sum;
         }
 
