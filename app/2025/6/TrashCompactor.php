@@ -52,11 +52,47 @@
          */
         function getPartTwoResult(): int
         {
-            $input = $this->readLines( 2025, 6 );
-            $sum = 0;
+            $input = file( INPUTS_PATH . '/2025/6_input.txt', FILE_IGNORE_NEW_LINES );
+            $operations = $this->parseOperations( $input );
+            $input = array_slice( $input, 0, count( $input ) - 1 );
 
+            krsort( $operations );
+            $operations = array_values( $operations );
+            $firstRow = str_split( $input[ 0 ] );
 
-            return $sum;
+            $res = [];
+            $c = 0;
+
+            for ( $i = count( $firstRow ) - 1; $i >= 0; $i-- )
+            {
+                $d = '';
+                for ( $j = 0; $j < count( $input ); $j++ )
+                {
+                    $char = $input[ $j ][ $i ];
+                    if ( $char !== ' ' )
+                    {
+                        $d .= $char;
+                    }
+                }
+
+                if ( (int)$d > 0 )
+                {
+                    if ( $operations[ $c ] === '+' )
+                    {
+                        $res[ $c ] = isset( $res[ $c ] ) ? $res[ $c ] + (int)$d : (int)$d;
+                    }
+                    else
+                    {
+                        $res[ $c ] = isset( $res[ $c ] ) ? $res[ $c ] * (int)$d : (int)$d;
+                    }
+                }
+                else
+                {
+                    $c++;
+                }
+            }
+
+            return array_sum( $res );
         }
 
 
