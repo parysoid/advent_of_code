@@ -94,9 +94,46 @@
         function getPartTwoResult(): int
         {
             $diagram = $this->readLines( 2025, 7 );
-            $sum = 0;
+            [ $startX, $startY ] = $this->getStartCoords( $diagram );
 
-            return $sum;
+            $curr = array_fill( 0, strlen( $diagram[ 0 ] ), 0 );
+            $curr[ $startX ] = 1;
+
+            for ( $y = $startY; $y < count( $diagram ); $y++ )
+            {
+                $line = str_split( $diagram[ $y ] );
+
+                $next = array_fill( 0, count( $line ), 0 );
+
+                for ( $x = 0; $x < count( $line ); $x++ )
+                {
+                    if ( $curr[ $x ] === 0 )
+                    {
+                        continue;
+                    }
+
+                    if ( $line[ $x ] === 'S' || $line[ $x ] === '.' )
+                    {
+                        $next[ $x ] += $curr[ $x ];
+                    }
+
+                    if ( $line[ $x ] === '^' )
+                    {
+                        if ( isset( $line[ $x + 1 ] ) )
+                        {
+                            $next[ $x + 1 ] += $curr[ $x ];
+                        }
+                        if ( isset( $line[ $x - 1 ] ) )
+                        {
+                            $next[ $x - 1 ] += $curr[ $x ];
+                        }
+                    }
+                }
+
+                $curr = $next;
+            }
+
+            return array_sum( $curr );
         }
 
 
